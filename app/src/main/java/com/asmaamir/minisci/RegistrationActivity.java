@@ -23,9 +23,16 @@ import androidx.camera.core.PreviewConfig;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.asmaamir.minisci.tflite.SimilarityClassifier;
+import com.asmaamir.minisci.tflite.TFLiteFacenetModel;
+
+import java.io.IOException;
+
 public class RegistrationActivity extends AppCompatActivity {
     private TextureView textureView;
     private ImageView imageView;
+    private SimilarityClassifier facenet;
+
     private static final String TAG = "RegistrationActivity";
     public static final int REQUEST_CODE_PERMISSION = 101;
     public static final String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.CAMERA"};
@@ -44,6 +51,23 @@ public class RegistrationActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSION);
         }
         textureView.addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> updateTransform());
+        initFacenet();
+    }
+
+    private void initFacenet() {
+        try {
+            facenet =
+                    TFLiteFacenetModel.create(getAssets());
+            //cropSize = TF_OD_API_INPUT_SIZE;
+        } catch (final IOException e) {
+            e.printStackTrace();
+            Log.e(TAG, "Exception initializing classifier!");
+            Toast toast =
+                    Toast.makeText(
+                            getApplicationContext(), "Classifier could not be initialized", Toast.LENGTH_SHORT);
+            toast.show();
+            finish();
+        }
     }
 
     private void initCamera() {
@@ -70,7 +94,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
         ImageAnalysis imageAnalysis = new ImageAnalysis(iac);
         imageAnalysis.setAnalyzer(Runnable::run,
-                new RegistrationAnalyzer(textureView, imageView, lens, this));
+                new RegistrationAnalyzer(textureView, imageView, lens, this, facenet));
         CameraX.bindToLifecycle(this, preview, imageAnalysis);
 
     }

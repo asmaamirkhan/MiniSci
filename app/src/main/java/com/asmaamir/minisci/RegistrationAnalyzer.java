@@ -2,12 +2,14 @@ package com.asmaamir.minisci;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.Rect;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.TextureView;
@@ -15,11 +17,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.camera.core.CameraX;
 import androidx.camera.core.ImageAnalysis;
 import androidx.camera.core.ImageProxy;
 
+import com.asmaamir.minisci.tflite.SimilarityClassifier;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.ml.vision.FirebaseVision;
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
@@ -27,6 +31,10 @@ import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata;
 import com.google.firebase.ml.vision.face.FirebaseVisionFace;
 import com.google.firebase.ml.vision.face.FirebaseVisionFaceDetector;
 import com.google.firebase.ml.vision.face.FirebaseVisionFaceDetectorOptions;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -45,12 +53,14 @@ public class RegistrationAnalyzer implements ImageAnalysis.Analyzer {
     private float heightScaleFactor = 1.0f;
     private FirebaseVisionImage fbImage;
     private CameraX.LensFacing lens;
+    private SimilarityClassifier facenet;
 
-    RegistrationAnalyzer(TextureView textureView, ImageView imageView, CameraX.LensFacing lens, Context context) {
+    RegistrationAnalyzer(TextureView textureView, ImageView imageView, CameraX.LensFacing lens, Context context, SimilarityClassifier facenet) {
         this.textureView = textureView;
         this.imageView = imageView;
         this.lens = lens;
         this.context = context;
+        this.facenet = facenet;
         initDrawingUtils();
         initDetector();
         initRegisterButton();
@@ -83,28 +93,58 @@ public class RegistrationAnalyzer implements ImageAnalysis.Analyzer {
         TextView tvTitle = dialogLayout.findViewById(R.id.dlg_title);
         EditText etName = dialogLayout.findViewById(R.id.dlg_input);
         tvTitle.setText("Add Face");
+
         if (lastFace != null) {
-            int cropHeight = (int) (lastFace.bottom - lastFace.top);
-            int cropWidth = (int) (lastFace.right - lastFace.left);
             Bitmap crop = Bitmap.createBitmap(fbImage.getBitmap(),
                     lastFace.left,
                     lastFace.top,
-                    cropWidth, cropHeight);
-            ivFace.setImageBitmap(crop);
+                    lastFace.right - lastFace.left,
+                    lastFace.bottom - lastFace.top);
+            Bitmap scaled = Bitmap.createScaledBitmap(crop, 160, 160, false);
+            ivFace.setImageBitmap(scaled);
+
+
+            etName.setHint("Input name");
+            builder.setPositiveButton("OK", (dlg, i) -> {
+                String name = etName.getText().toString();
+                if (name.isEmpty()) {
+                    Toast.makeText(context, "Enter ur name", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                SharedPreferences.Editor prefEditor = PreferenceManager.getDefaultSharedPreferences(context)
+                        .edit();
+                prefEditor.putString("user_name", name);
+                prefEditor.apply();
+
+                float[] emb = facenet.recognizeImage(scaled, false);
+                setPrefFloatArray("embedding", emb);
+
+                dlg.dismiss();
+            });
+            builder.setView(dialogLayout);
+            builder.show();
         }
-        etName.setHint("Input name");
-        builder.setPositiveButton("OK", (dlg, i) -> {
-            String name = etName.getText().toString();
-            if (name.isEmpty()) {
-                return;
-            }
-            //detector.register(name, rec);
-            dlg.dismiss();
-        });
-        builder.setView(dialogLayout);
-        builder.show();
     }
 
+    public void setPrefFloatArray(String tag, float[] value) {
+        SharedPreferences.Editor prefEditor = PreferenceManager.getDefaultSharedPreferences(context)
+                .edit();
+
+        String s;
+        try {
+            JSONArray jsonArr = new JSONArray();
+            for (float i : value)
+                jsonArr.put(i);
+            JSONObject json = new JSONObject();
+            json.put(tag, jsonArr);
+            s = json.toString();
+        } catch (JSONException excp) {
+            s = "";
+        }
+
+        prefEditor.putString(tag, s);
+        prefEditor.apply();
+    }
 
     private void initDrawingUtils() {
         linePaint = new Paint();
