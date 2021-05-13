@@ -1,7 +1,6 @@
 plugins {
     id 'com.android.application'
 }
-
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
@@ -27,6 +26,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 }
+apply plugin: 'com.google.gms.google-services'
 
 dependencies {
 
@@ -36,4 +36,18 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    // for camerax
+    def camerax_version = '1.0.0-alpha06'
+    implementation "androidx.camera:camera-core:${camerax_version}"
+    implementation "androidx.camera:camera-camera2:${camerax_version}"
+
+    // for mlkit
+    implementation 'com.google.firebase:firebase-ml-vision:24.0.1'
+
+    // for tf interpreter
+    implementation('org.tensorflow:tensorflow-lite:0.0.0-nightly') { changing = true }
+
+    // for mlkit face detection
+    implementation 'com.google.firebase:firebase-ml-vision-face-model:19.0.0'
 }

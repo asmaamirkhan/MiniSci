@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "503279330367",
+    "project_id": "minisci-b2134",
+    "storage_bucket": "minisci-b2134.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:503279330367:android:778794f2b03ac4c3a3448a",
+        "android_client_info": {
+          "package_name": "com.asmaamir.minisci"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "503279330367-a92h8gnsl80ncder7qkobu9ledp1hfon.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAR8HRm4YFlU7602mJU30_nqzwRVFC0uus"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "503279330367-a92h8gnsl80ncder7qkobu9ledp1hfon.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
