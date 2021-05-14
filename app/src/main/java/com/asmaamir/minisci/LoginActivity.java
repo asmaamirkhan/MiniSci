@@ -98,8 +98,9 @@ public class LoginActivity extends AppCompatActivity {
         LoginAnalyzer loginAnalyzer = new LoginAnalyzer(textureView, imageView, lens, this, facenet);
         loginAnalyzer.setFaceAnalyzerObserver(new LoginAnalyzer.FaceAnalyzerObserver() {
             @Override
-            public void onRegisteredFaceFound() {
-                redirectDash();
+            public void onRegisteredFaceFound(float smileProb, float eyeOpenProbAvg) {
+                Log.i(TAG, "smile: " + smileProb + " eyes: " + eyeOpenProbAvg);
+                redirectDash(smileProb, eyeOpenProbAvg);
             }
         });
         imageAnalysis.setAnalyzer(Runnable::run, loginAnalyzer);
@@ -108,15 +109,14 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void redirectDash() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                CameraX.unbindAll();
-                finish();
-                Intent loginRedirect = new Intent(LoginActivity.this, DashboardActivity.class);
-                startActivity(loginRedirect);
-            }
+    private void redirectDash(float smileProb, float eyeOpenProbAvg) {
+        runOnUiThread(() -> {
+            CameraX.unbindAll();
+            finish();
+            Intent dashRedirect = new Intent(LoginActivity.this, DashboardActivity.class);
+            dashRedirect.putExtra("smileProb", smileProb);
+            dashRedirect.putExtra("eyeOpenProbAvg", eyeOpenProbAvg);
+            startActivity(dashRedirect);
         });
 
     }

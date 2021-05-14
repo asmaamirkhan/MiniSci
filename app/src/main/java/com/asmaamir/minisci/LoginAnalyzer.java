@@ -40,7 +40,7 @@ public class LoginAnalyzer implements ImageAnalysis.Analyzer {
     private FirebaseVisionFaceDetector faceDetector;
     private final TextureView textureView;
     private final ImageView imageView;
-    private Rect lastFace;
+    private FirebaseVisionFace lastFace;
     private Context context;
     private Bitmap bitmap;
     private Canvas canvas;
@@ -78,7 +78,7 @@ public class LoginAnalyzer implements ImageAnalysis.Analyzer {
             initBitmap();
             detectFaces();
         } else {
-            observer.onRegisteredFaceFound();
+
             /*CameraX.unbindAll();
             image.close();
             Intent loginRedirect = new Intent(context, DashboardActivity.class);
@@ -156,7 +156,7 @@ public class LoginAnalyzer implements ImageAnalysis.Analyzer {
                     (int) translateX(face.getBoundingBox().right),
                     (int) translateY(face.getBoundingBox().bottom));
             canvas.drawRect(box, linePaint);
-            lastFace = face.getBoundingBox();
+            lastFace = face;
             /*AsyncTask.execute(() -> {
                 Bitmap crop = Bitmap.createBitmap(fbImage.getBitmap(),
                         face.getBoundingBox().left,
@@ -180,20 +180,23 @@ public class LoginAnalyzer implements ImageAnalysis.Analyzer {
             public void run() {
                 if (lastFace != null && DETECTION_FLAG) {
                     Bitmap crop = Bitmap.createBitmap(fbImage.getBitmap(),
-                            lastFace.left,
-                            lastFace.top,
-                            lastFace.right - lastFace.left,
-                            lastFace.bottom - lastFace.top);
+                            lastFace.getBoundingBox().left,
+                            lastFace.getBoundingBox().top,
+                            lastFace.getBoundingBox().right - lastFace.getBoundingBox().left,
+                            lastFace.getBoundingBox().bottom - lastFace.getBoundingBox().top);
                     Bitmap scaled = Bitmap.createScaledBitmap(crop, 160, 160, false);
                     currentUser = facenet.recognizeImage(scaled, false);
                     float distance = facenet.findCosDistance(registeredUser, currentUser);
                     Log.i(TAG, "distance: " + distance + " flag: " + DETECTION_FLAG);
                     if (distance > SIMILARITY_THRESH) {
                         DETECTION_FLAG = false;
+                        observer.onRegisteredFaceFound(lastFace.getSmilingProbability(),
+                                (lastFace.getLeftEyeOpenProbability() +
+                                        lastFace.getRightEyeOpenProbability()) / 2);
                     }
                 }
             }
-        }, 0, 1000);//put here time 1000 milliseconds=1 second
+        }, 0, 1000);
     }
 
     private float translateY(float y) {
@@ -229,6 +232,6 @@ public class LoginAnalyzer implements ImageAnalysis.Analyzer {
     }
 
     public interface FaceAnalyzerObserver {
-        public void onRegisteredFaceFound();
+        public void onRegisteredFaceFound(float smileProb, float eyeOpenProbAvg);
     }
 }
