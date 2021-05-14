@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_explore"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Etrafı keşfet" />
+        <item
+            android:id="@+id/nav_quiz"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Quiz çöz" />
+        <item
+            android:id="@+id/nav_quick_info"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Hızlı bilgi" />
+        <item
+            android:id="@+id/nav_get_quote"
+            android:icon="@drawable/ic_baseline_tag_faces_24"
+            android:title="Hızlı söz" />
+    </group>
+</menu>

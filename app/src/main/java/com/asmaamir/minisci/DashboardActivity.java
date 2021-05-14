@@ -4,25 +4,83 @@ import android.app.AlertDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.google.android.material.navigation.NavigationView;
 
 public class DashboardActivity extends AppCompatActivity {
     private final String[] EMOTIONS = {"HAPPY", "SAD", "DROWSY"};
     private final static float SMILE_THRESH = 0.6f;
+    private final static String TAG = "DashboardActivity";
     private final static float SAD_THRESH = 0.1f;
     private final static float EYE_OPEN_THRESH = 0.6f;
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle actionBarDrawerToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         initReceptionDialog(getUserEmotion());
+        initNavigationDrawer();
+    }
 
+
+    private void initNavigationDrawer() {
+        drawerLayout = findViewById(R.id.drawer_layout);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.app_name, R.string.app_name) {
+            public void onDrawerClosed(View view) {
+                Log.i(TAG, "onDrawerClosed");
+            }
+
+            public void onDrawerOpened(View drawerView) {
+                Log.i(TAG, "onDrawerOpened");
+            }
+        };
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+
+        if (getSupportActionBar() != null)
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        NavigationView navigationView = findViewById(R.id.navigation_view);
+
+        navigationView.setNavigationItemSelectedListener((MenuItem menuItem) -> {
+                    int id = menuItem.getItemId();
+                    switch (id) {
+                        case R.id.nav_explore:
+                            Log.i(TAG, "nav_explore");
+                            return true;
+                        case R.id.nav_quiz:
+                            Log.i(TAG, "nav quiz");
+                            return true;
+                        case R.id.nav_quick_info:
+                            Log.i(TAG, "quick info");
+                            return true;
+                        case R.id.nav_get_quote:
+                            Log.i(TAG, "get quote");
+                            return true;
+                        default:
+                            Log.i(TAG, "item clicked");
+                            return true;
+                    }
+                }
+        );
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (actionBarDrawerToggle.onOptionsItemSelected(item))
+            return true;
+        return super.onOptionsItemSelected(item);
     }
 
     private String getUserEmotion() {
