@@ -1,6 +1,5 @@
 package com.asmaamir.minisci;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -11,20 +10,14 @@ import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.TextureView;
-import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.camera.core.CameraX;
 import androidx.camera.core.ImageAnalysis;
 import androidx.camera.core.ImageProxy;
 
 import com.asmaamir.minisci.tflite.SimilarityClassifier;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.ml.vision.FirebaseVision;
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata;
@@ -35,15 +28,18 @@ import com.google.firebase.ml.vision.face.FirebaseVisionFaceDetectorOptions;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
-public class RegistrationAnalyzer implements ImageAnalysis.Analyzer {
-    private static final String TAG = "RegistrationAnalyzer";
+public class LoginAnalyzer implements ImageAnalysis.Analyzer {
+    private static final String TAG = "LoginAnalyzer";
+    private static final float SIMILARITY_THRESH = 0.6f;
     private FirebaseVisionFaceDetector faceDetector;
     private final TextureView textureView;
     private final ImageView imageView;
-    private FloatingActionButton butRegister;
     private Rect lastFace;
     private Context context;
     private Bitmap bitmap;
@@ -54,97 +50,65 @@ public class RegistrationAnalyzer implements ImageAnalysis.Analyzer {
     private FirebaseVisionImage fbImage;
     private CameraX.LensFacing lens;
     private SimilarityClassifier facenet;
+    private boolean DETECTION_FLAG = true;
+    private float[] registeredUser = {0.0f};
+    private float[] currentUser = {0.0f};
 
-    RegistrationAnalyzer(TextureView textureView, ImageView imageView, CameraX.LensFacing lens, Context context, SimilarityClassifier facenet) {
+    private FaceAnalyzerObserver observer;
+
+    LoginAnalyzer(TextureView textureView, ImageView imageView, CameraX.LensFacing lens, Context context, SimilarityClassifier facenet) {
         this.textureView = textureView;
         this.imageView = imageView;
         this.lens = lens;
         this.context = context;
         this.facenet = facenet;
+        this.observer = null;
         initDrawingUtils();
         initDetector();
-        //initRegisterButton();
+        initRecognitionTimer();
+        getRegisteredUserEmb();
     }
 
     @Override
     public void analyze(ImageProxy image, int rotationDegrees) {
-        long currentTimeStamp = System.currentTimeMillis();
-        Log.i(TAG, "" + currentTimeStamp);
-        int rotation = degreesToFirebaseRotation(rotationDegrees);
-        fbImage = FirebaseVisionImage.fromMediaImage(image.getImage(), rotation);
-        initBitmap();
-        detectFaces();
-
-    }
-
-    private void initRegisterButton() {
-        butRegister = (FloatingActionButton) ((LoginActivity) context).findViewById(R.id.button_register);
-        butRegister.setOnClickListener(v ->
-        {
-            showAddFaceDialog();
-        });
-
-    }
-
-    private void showAddFaceDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View dialogLayout = inflater.inflate(R.layout.face_edit_dialog, null);
-        ImageView ivFace = dialogLayout.findViewById(R.id.dlg_image);
-        TextView tvTitle = dialogLayout.findViewById(R.id.dlg_title);
-        EditText etName = dialogLayout.findViewById(R.id.dlg_input);
-        tvTitle.setText("Add Face");
-
-        if (lastFace != null) {
-            Bitmap crop = Bitmap.createBitmap(fbImage.getBitmap(),
-                    lastFace.left,
-                    lastFace.top,
-                    lastFace.right - lastFace.left,
-                    lastFace.bottom - lastFace.top);
-            Bitmap scaled = Bitmap.createScaledBitmap(crop, 160, 160, false);
-            ivFace.setImageBitmap(scaled);
-
-
-            etName.setHint("Input name");
-            builder.setPositiveButton("OK", (dlg, i) -> {
-                String name = etName.getText().toString();
-                if (name.isEmpty()) {
-                    Toast.makeText(context, "Enter ur name", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                SharedPreferences.Editor prefEditor = PreferenceManager.getDefaultSharedPreferences(context)
-                        .edit();
-                prefEditor.putString("user_name", name);
-                prefEditor.apply();
-
-                float[] emb = facenet.recognizeImage(scaled, false);
-                setPrefFloatArray("embedding", emb);
-
-                dlg.dismiss();
-            });
-            builder.setView(dialogLayout);
-            builder.show();
+        Log.i(TAG, "flag: " + DETECTION_FLAG);
+        if (DETECTION_FLAG) {
+            int rotation = degreesToFirebaseRotation(rotationDegrees);
+            fbImage = FirebaseVisionImage.fromMediaImage(image.getImage(), rotation);
+            initBitmap();
+            detectFaces();
+        } else {
+            observer.onRegisteredFaceFound();
+            /*CameraX.unbindAll();
+            image.close();
+            Intent loginRedirect = new Intent(context, DashboardActivity.class);
+            context.startActivity(loginRedirect);
+            ((Activity) context).finish();
+            Log.i(TAG, "end");*/
         }
     }
 
-    public void setPrefFloatArray(String tag, float[] value) {
-        SharedPreferences.Editor prefEditor = PreferenceManager.getDefaultSharedPreferences(context)
-                .edit();
+    private void getRegisteredUserEmb() {
+        registeredUser = getPrefFloatArray("embedding", registeredUser);
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
+    }
 
-        String s;
+    public float[] getPrefFloatArray(String tag, float[] defaultValue) {
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
+        String s = pref.getString(tag, "");
         try {
-            JSONArray jsonArr = new JSONArray();
-            for (float i : value)
-                jsonArr.put(i);
-            JSONObject json = new JSONObject();
-            json.put(tag, jsonArr);
-            s = json.toString();
-        } catch (JSONException excp) {
-            s = "";
-        }
+            JSONObject json = new JSONObject(new JSONTokener(s));
+            JSONArray jsonArr = json.getJSONArray(tag);
 
-        prefEditor.putString(tag, s);
-        prefEditor.apply();
+            float[] result = new float[jsonArr.length()];
+
+            for (int i = 0; i < jsonArr.length(); i++)
+                result[i] = (float) jsonArr.getDouble(i);
+
+            return result;
+        } catch (JSONException excp) {
+            return defaultValue;
+        }
     }
 
     private void initDrawingUtils() {
@@ -193,8 +157,43 @@ public class RegistrationAnalyzer implements ImageAnalysis.Analyzer {
                     (int) translateY(face.getBoundingBox().bottom));
             canvas.drawRect(box, linePaint);
             lastFace = face.getBoundingBox();
+            /*AsyncTask.execute(() -> {
+                Bitmap crop = Bitmap.createBitmap(fbImage.getBitmap(),
+                        face.getBoundingBox().left,
+                        face.getBoundingBox().top,
+                        face.getBoundingBox().right - face.getBoundingBox().left,
+                        face.getBoundingBox().bottom - face.getBoundingBox().top);
+                Bitmap scaled = Bitmap.createScaledBitmap(crop, 160, 160, false);
+                currentUser = facenet.recognizeImage(scaled, false);
+                float distance = facenet.findCosDistance(registeredUser, currentUser);
+                Log.i(TAG, "distance: " + distance);
+            });*/
+
+
         }
         imageView.setImageBitmap(bitmap);
+    }
+
+    private void initRecognitionTimer() {
+        new Timer().scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                if (lastFace != null && DETECTION_FLAG) {
+                    Bitmap crop = Bitmap.createBitmap(fbImage.getBitmap(),
+                            lastFace.left,
+                            lastFace.top,
+                            lastFace.right - lastFace.left,
+                            lastFace.bottom - lastFace.top);
+                    Bitmap scaled = Bitmap.createScaledBitmap(crop, 160, 160, false);
+                    currentUser = facenet.recognizeImage(scaled, false);
+                    float distance = facenet.findCosDistance(registeredUser, currentUser);
+                    Log.i(TAG, "distance: " + distance + " flag: " + DETECTION_FLAG);
+                    if (distance > SIMILARITY_THRESH) {
+                        DETECTION_FLAG = false;
+                    }
+                }
+            }
+        }, 0, 1000);//put here time 1000 milliseconds=1 second
     }
 
     private float translateY(float y) {
@@ -223,5 +222,13 @@ public class RegistrationAnalyzer implements ImageAnalysis.Analyzer {
             default:
                 throw new IllegalArgumentException("Rotation must be 0, 90, 180, or 270.");
         }
+    }
+
+    public void setFaceAnalyzerObserver(FaceAnalyzerObserver observer) {
+        this.observer = observer;
+    }
+
+    public interface FaceAnalyzerObserver {
+        public void onRegisteredFaceFound();
     }
 }

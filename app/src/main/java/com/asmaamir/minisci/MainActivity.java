@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
+import android.view.WindowManager;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_main);
         butSignin = (Button) findViewById(R.id.button_signin);
         butSignup = (Button) findViewById(R.id.button_signup);
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(regRedirect);
         });
         butSignin.setOnClickListener(v -> {
-            float[] arr = {1, 1, 1};
+            /*float[] arr = {1, 1, 1};
             float[] prefArr = getPrefFloatArray("embedding", arr);
             Log.i(TAG, "Size: " + getPrefFloatArray("embedding", arr).length);
             String vector = "";
@@ -42,7 +43,10 @@ public class MainActivity extends AppCompatActivity {
             Log.i(TAG, vector);
             SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
             String s = pref.getString("user_name", "NONE");
-            Log.i(TAG, s);
+            Log.i(TAG, s);*/
+            Intent loginRedirect = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(loginRedirect);
+
         });
     }
 

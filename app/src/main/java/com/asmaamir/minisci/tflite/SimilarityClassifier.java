@@ -10,6 +10,8 @@ public interface SimilarityClassifier {
     //List<Recognition> recognizeImage(Bitmap bitmap, boolean getExtra);
     float[] recognizeImage(Bitmap bitmap, boolean getExtra);
 
+    float findCosDistance(float[] knownEmb, float[] currentEmb);
+
     void enableStatLogging(final boolean debug);
 
     String getStatString();

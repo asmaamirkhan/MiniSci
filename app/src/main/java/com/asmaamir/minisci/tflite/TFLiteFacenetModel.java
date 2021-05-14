@@ -144,35 +144,35 @@ public class TFLiteFacenetModel
 
     // looks for the nearest embeeding in the dataset (using L2 norm)
     // and retrurns the pair <id, distance>
-    private Pair<String, Float> findNearest(float[] emb) {
+    //private Pair<String, Float> findNearest(float[] emb) {
+    public float findCosDistance(float[] knownEmb, float[] currentEmb) {
 
         Pair<String, Float> ret = null;
-        for (Map.Entry<String, Recognition> entry : registered.entrySet()) {
-            final String name = entry.getKey();
-            final float[] knownEmb = ((float[][]) entry.getValue().getExtra())[0];
+        //for (Map.Entry<String, Recognition> entry : registered.entrySet()) {
+        //final String name = entry.getKey();
+        //final float[] knownEmb = ((float[][]) entry.getValue().getExtra())[0];
 
-            float distance = 0;
+        float distance = 0;
         /*for (int i = 0; i < emb.length; i++) {
               float diff = emb[i] - knownEmb[i];
               distance += diff*diff;
         }
         distance = (float) Math.sqrt(distance);*/
-            float dotProduct = 0.0f;
-            float normA = 0.0f;
-            float normB = 0.0f;
-            for (int i = 0; i < emb.length; i++) {
-                dotProduct += emb[i] * knownEmb[i];
-                normA += Math.pow(emb[i], 2);
-                normB += Math.pow(knownEmb[i], 2);
-            }
-            float f =
-                    distance = dotProduct / ((float) Math.sqrt(normA) * (float) Math.sqrt(normB));
-            if (ret == null || distance < ret.second) {
-                ret = new Pair<>(name, distance);
-            }
+        float dotProduct = 0.0f;
+        float normA = 0.0f;
+        float normB = 0.0f;
+        for (int i = 0; i < currentEmb.length; i++) {
+            dotProduct += currentEmb[i] * knownEmb[i];
+            normA += Math.pow(currentEmb[i], 2);
+            normB += Math.pow(knownEmb[i], 2);
         }
+        float f = dotProduct / ((float) Math.sqrt(normA) * (float) Math.sqrt(normB));
+        /*if (ret == null || distance < ret.second) {
+            ret = new Pair<>(name, distance);
+        }*/
+        //}
 
-        return ret;
+        return f;
 
     }
 
