@@ -54,6 +54,7 @@ public class RegistrationAnalyzer implements ImageAnalysis.Analyzer {
     private FirebaseVisionImage fbImage;
     private CameraX.LensFacing lens;
     private SimilarityClassifier facenet;
+    private boolean DETECTION_FLAG = true;
 
     RegistrationAnalyzer(TextureView textureView, ImageView imageView, CameraX.LensFacing lens, Context context, SimilarityClassifier facenet) {
         this.textureView = textureView;
@@ -68,12 +69,12 @@ public class RegistrationAnalyzer implements ImageAnalysis.Analyzer {
 
     @Override
     public void analyze(ImageProxy image, int rotationDegrees) {
-        long currentTimeStamp = System.currentTimeMillis();
-        int rotation = degreesToFirebaseRotation(rotationDegrees);
-        fbImage = FirebaseVisionImage.fromMediaImage(image.getImage(), rotation);
-        initBitmap();
-        detectFaces();
-
+        if (DETECTION_FLAG) {
+            int rotation = degreesToFirebaseRotation(rotationDegrees);
+            fbImage = FirebaseVisionImage.fromMediaImage(image.getImage(), rotation);
+            initBitmap();
+            detectFaces();
+        }
     }
 
     private void initRegisterButton() {
@@ -81,6 +82,7 @@ public class RegistrationAnalyzer implements ImageAnalysis.Analyzer {
         butRegister.setOnClickListener(v ->
         {
             Log.i(TAG, "clicked");
+            DETECTION_FLAG = false;
             showAddFaceDialog();
         });
 
