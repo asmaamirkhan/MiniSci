@@ -63,13 +63,12 @@ public class RegistrationAnalyzer implements ImageAnalysis.Analyzer {
         this.facenet = facenet;
         initDrawingUtils();
         initDetector();
-        //initRegisterButton();
+        initRegisterButton();
     }
 
     @Override
     public void analyze(ImageProxy image, int rotationDegrees) {
         long currentTimeStamp = System.currentTimeMillis();
-        Log.i(TAG, "" + currentTimeStamp);
         int rotation = degreesToFirebaseRotation(rotationDegrees);
         fbImage = FirebaseVisionImage.fromMediaImage(image.getImage(), rotation);
         initBitmap();
@@ -78,9 +77,10 @@ public class RegistrationAnalyzer implements ImageAnalysis.Analyzer {
     }
 
     private void initRegisterButton() {
-        butRegister = (FloatingActionButton) ((LoginActivity) context).findViewById(R.id.button_register);
+        butRegister = (FloatingActionButton) ((RegistrationActivity) context).findViewById(R.id.button_register);
         butRegister.setOnClickListener(v ->
         {
+            Log.i(TAG, "clicked");
             showAddFaceDialog();
         });
 
@@ -166,7 +166,6 @@ public class RegistrationAnalyzer implements ImageAnalysis.Analyzer {
     private void initDetector() {
         FirebaseVisionFaceDetectorOptions detectorOptions = new FirebaseVisionFaceDetectorOptions
                 .Builder()
-                .setClassificationMode(FirebaseVisionFaceDetectorOptions.ALL_CLASSIFICATIONS)
                 .build();
         faceDetector = FirebaseVision
                 .getInstance()

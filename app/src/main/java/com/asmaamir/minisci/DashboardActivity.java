@@ -29,7 +29,7 @@ public class DashboardActivity extends AppCompatActivity {
         TextView tvMessage = dialogLayout.findViewById(R.id.result_dlg_message);
 
         tvTitle.setText("Hoş geldin! 🎉");
-        tvMessage.setText("Nasılsın bugün " + getUserName() + "?");
+        tvMessage.setText(String.format("Nasılsın bugün %s?", getUserName()));
         ivRes.setImageResource(R.drawable.ic_baseline_tag_faces_24);
         builder.setPositiveButton("Devam", (dlg, i) -> {
             dlg.dismiss();
