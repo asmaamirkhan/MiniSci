@@ -1,4 +1,4 @@
-package com.asmaamir.minisci;
+package com.asmaamir.minisci.analyzers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -56,7 +56,7 @@ public class LoginAnalyzer implements ImageAnalysis.Analyzer {
 
     private FaceAnalyzerObserver observer;
 
-    LoginAnalyzer(TextureView textureView, ImageView imageView, CameraX.LensFacing lens, Context context, SimilarityClassifier facenet) {
+    public LoginAnalyzer(TextureView textureView, ImageView imageView, CameraX.LensFacing lens, Context context, SimilarityClassifier facenet) {
         this.textureView = textureView;
         this.imageView = imageView;
         this.lens = lens;

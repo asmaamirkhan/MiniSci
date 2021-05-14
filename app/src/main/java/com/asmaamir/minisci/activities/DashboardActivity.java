@@ -1,6 +1,7 @@
-package com.asmaamir.minisci;
+package com.asmaamir.minisci.activities;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -15,6 +16,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.asmaamir.minisci.R;
 import com.google.android.material.navigation.NavigationView;
 
 public class DashboardActivity extends AppCompatActivity {
@@ -58,22 +60,32 @@ public class DashboardActivity extends AppCompatActivity {
                     switch (id) {
                         case R.id.nav_explore:
                             Log.i(TAG, "nav_explore");
+                            switchActivity(ExploreActivity.class);
                             return true;
                         case R.id.nav_quiz:
                             Log.i(TAG, "nav quiz");
+                            switchActivity(QuizActivity.class);
                             return true;
                         case R.id.nav_quick_info:
                             Log.i(TAG, "quick info");
+                            switchActivity(InfoActivity.class);
                             return true;
                         case R.id.nav_get_quote:
                             Log.i(TAG, "get quote");
+                            switchActivity(InfoActivity.class);
                             return true;
                         default:
                             Log.i(TAG, "item clicked");
+                            switchActivity(QuizActivity.class);
                             return true;
                     }
                 }
         );
+    }
+
+    private void switchActivity(Class<?> cls) {
+        Intent dashRedirect = new Intent(DashboardActivity.this, cls);
+        startActivity(dashRedirect);
     }
 
     @Override

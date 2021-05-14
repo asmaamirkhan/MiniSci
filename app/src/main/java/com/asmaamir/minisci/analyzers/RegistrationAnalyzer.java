@@ -1,4 +1,4 @@
-package com.asmaamir.minisci;
+package com.asmaamir.minisci.analyzers;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -23,6 +23,8 @@ import androidx.camera.core.CameraX;
 import androidx.camera.core.ImageAnalysis;
 import androidx.camera.core.ImageProxy;
 
+import com.asmaamir.minisci.R;
+import com.asmaamir.minisci.activities.RegistrationActivity;
 import com.asmaamir.minisci.tflite.SimilarityClassifier;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.ml.vision.FirebaseVision;
@@ -56,7 +58,7 @@ public class RegistrationAnalyzer implements ImageAnalysis.Analyzer {
     private SimilarityClassifier facenet;
     private boolean DETECTION_FLAG = true;
 
-    RegistrationAnalyzer(TextureView textureView, ImageView imageView, CameraX.LensFacing lens, Context context, SimilarityClassifier facenet) {
+    public RegistrationAnalyzer(TextureView textureView, ImageView imageView, CameraX.LensFacing lens, Context context, SimilarityClassifier facenet) {
         this.textureView = textureView;
         this.imageView = imageView;
         this.lens = lens;

@@ -1,4 +1,4 @@
-package com.asmaamir.minisci;
+package com.asmaamir.minisci.activities;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -24,6 +24,8 @@ import androidx.camera.core.PreviewConfig;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.asmaamir.minisci.R;
+import com.asmaamir.minisci.analyzers.LoginAnalyzer;
 import com.asmaamir.minisci.tflite.SimilarityClassifier;
 import com.asmaamir.minisci.tflite.TFLiteFacenetModel;
 

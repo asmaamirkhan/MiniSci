@@ -1,4 +1,4 @@
-package com.asmaamir.minisci;
+package com.asmaamir.minisci.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,6 +8,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.asmaamir.minisci.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
