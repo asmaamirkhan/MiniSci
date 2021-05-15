@@ -72,7 +72,7 @@ public class DashboardActivity extends AppCompatActivity {
                             return true;
                         case R.id.nav_get_quote:
                             Log.i(TAG, "get quote");
-                            switchActivity(InfoActivity.class);
+                            switchActivity(QuoteActivity.class);
                             return true;
                         default:
                             Log.i(TAG, "item clicked");
