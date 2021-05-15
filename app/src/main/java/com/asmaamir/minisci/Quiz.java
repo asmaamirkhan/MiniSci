@@ -12,10 +12,10 @@ public class Quiz implements Serializable {
     private String id;
 
     private String question, choiceA, choiceB, choiceC;
-    private int answer;
+    private int answer, randomID;
+
 
     public Quiz() {
-
     }
 
     public Quiz(String question, String choiceA, String choiceB, String choiceC, int answer) {
@@ -54,6 +54,9 @@ public class Quiz implements Serializable {
         this.answer = answer;
     }
 
+    public void setRandomID(int randomID) {
+        this.randomID = randomID;
+    }
 
     public String getQuestion() {
         return question;
@@ -71,16 +74,21 @@ public class Quiz implements Serializable {
         return choiceC;
     }
 
-    public int getAnswer(int answer) {
+    public int getAnswer() {
         return answer;
+    }
+
+    public int getRandomID() {
+        return randomID;
     }
 
     @NonNull
     @Override
     public String toString() {
 
-        return String.format("id: %s, question: %s, choiceA: %s, choiceB: %s, choiceC: %s, answer: %d",
+        return String.format("id: %s, randomID: %d, question: %s, choiceA: %s, choiceB: %s, choiceC: %s, answer: %d",
                 id,
+                randomID,
                 question,
                 choiceA,
                 choiceB,
