@@ -8,6 +8,7 @@ import android.util.Size;
 import android.view.Surface;
 import android.view.TextureView;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -38,11 +39,12 @@ public class ExploreActivity extends AppCompatActivity {
     public static final int REQUEST_CODE_PERMISSION = 101;
     public static final String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.CAMERA"};
 
-    public static CameraX.LensFacing lens = CameraX.LensFacing.FRONT;
+    public static CameraX.LensFacing lens = CameraX.LensFacing.BACK;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_explore);
         textureView = findViewById(R.id.texture_view_explore);
         imageView = findViewById(R.id.image_view_explore);
