@@ -18,8 +18,8 @@ import java.util.ArrayList;
 public class ObjInfoActivity extends AppCompatActivity {
     private static final String TAG = "ObjInfoActivity";
     private FirebaseFirestore db;
+
     private String objectName = "";
-    private Object object;
     private RecyclerView recyclerView;
     ArrayList<Pair<String, String>> detailsArray;
     private LinearLayoutManager linearLayoutManager;
@@ -35,8 +35,6 @@ public class ObjInfoActivity extends AppCompatActivity {
         if (extras != null) {
             objectName = extras.getString("objectName");
         }
-        //TextView tvTitle = findViewById(R.id.obj_title);
-        //tvTitle.setText(objectName);
         fetchData();
         recyclerView = findViewById(R.id.obj_info_recycler_view);
     }
@@ -52,7 +50,7 @@ public class ObjInfoActivity extends AppCompatActivity {
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     if (!queryDocumentSnapshots.isEmpty()) {
                         Log.i(TAG, "size: " + queryDocumentSnapshots.size());
-                        object = queryDocumentSnapshots.getDocuments().get(0).toObject(Object.class);
+                        Object object = queryDocumentSnapshots.getDocuments().get(0).toObject(Object.class);
                         for (String key : object.getDetails().get(0).keySet()) {
                             Pair<String, String> pair = new Pair<>(key, object.getDetails().get(0).get(key));
                             detailsArray.add(pair);
