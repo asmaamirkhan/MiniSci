@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MiniSci">
-        <activity android:name=".activities.InfoActivity"></activity>
+        <activity android:name=".activities.ObjInfoActivity"></activity>
+        <activity android:name=".activities.InfoActivity" />
         <activity android:name=".activities.QuizActivity" />
         <activity android:name=".activities.ExploreActivity" />
         <activity android:name=".activities.DashboardActivity" />

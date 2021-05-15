@@ -1,5 +1,6 @@
 package com.asmaamir.minisci.activities;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Matrix;
 import android.os.Bundle;
@@ -97,6 +98,19 @@ public class ExploreActivity extends AppCompatActivity {
 
         ImageAnalysis imageAnalysis = new ImageAnalysis(iac);
         DetectionAnalyzer detectionAnalyzer = new DetectionAnalyzer(textureView, imageView, lens, this, facenet);
+        detectionAnalyzer.setExploreAnalyzerObserver(new DetectionAnalyzer.ExploreAnalyzerObserver() {
+            @Override
+            public void onKnownObjectClicked(String title) {
+                Log.i(TAG, "object clicked: " + title);
+                runOnUiThread(() -> {
+                    CameraX.unbindAll();
+                    finish();
+                    Intent objRedirect = new Intent(ExploreActivity.this, ObjInfoActivity.class);
+                    objRedirect.putExtra("objectName", title);
+                    startActivity(objRedirect);
+                });
+            }
+        });
         imageAnalysis.setAnalyzer(Runnable::run, detectionAnalyzer);
         CameraX.bindToLifecycle(this, preview, imageAnalysis);
 
