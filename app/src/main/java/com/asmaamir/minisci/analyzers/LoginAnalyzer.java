@@ -179,11 +179,27 @@ public class LoginAnalyzer implements ImageAnalysis.Analyzer {
             @Override
             public void run() {
                 if (lastFace != null && DETECTION_FLAG) {
-                    Bitmap crop = Bitmap.createBitmap(fbImage.getBitmap(),
-                            lastFace.getBoundingBox().left,
-                            lastFace.getBoundingBox().top,
-                            lastFace.getBoundingBox().right - lastFace.getBoundingBox().left,
-                            lastFace.getBoundingBox().bottom - lastFace.getBoundingBox().top);
+                    int width = lastFace.getBoundingBox().right - lastFace.getBoundingBox().left;
+                    int height = lastFace.getBoundingBox().bottom - lastFace.getBoundingBox().top;
+                    Bitmap crop;
+                    // process overflowing
+                    if (lastFace.getBoundingBox().left + width < fbImage.getBitmap().getWidth() && lastFace.getBoundingBox().top + height < fbImage.getBitmap().getHeight()) {
+                        crop = Bitmap.createBitmap(fbImage.getBitmap(),
+                                lastFace.getBoundingBox().left,
+                                lastFace.getBoundingBox().top,
+                                width,
+                                height);
+                    } else {
+                        width = fbImage.getBitmap().getWidth() - lastFace.getBoundingBox().left - 1;
+                        height = fbImage.getBitmap().getHeight() - lastFace.getBoundingBox().top - 1;
+                        crop = Bitmap.createBitmap(fbImage.getBitmap(),
+                                lastFace.getBoundingBox().left,
+                                lastFace.getBoundingBox().top,
+                                width,
+                                height);
+
+
+                    }
                     Bitmap scaled = Bitmap.createScaledBitmap(crop, 160, 160, false);
                     currentUser = facenet.recognizeImage(scaled, false);
                     float distance = facenet.findCosDistance(registeredUser, currentUser);
