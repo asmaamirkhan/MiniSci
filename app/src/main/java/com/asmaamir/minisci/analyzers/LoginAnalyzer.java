@@ -185,16 +185,16 @@ public class LoginAnalyzer implements ImageAnalysis.Analyzer {
                     // process overflowing
                     if (lastFace.getBoundingBox().left + width < fbImage.getBitmap().getWidth() && lastFace.getBoundingBox().top + height < fbImage.getBitmap().getHeight()) {
                         crop = Bitmap.createBitmap(fbImage.getBitmap(),
-                                lastFace.getBoundingBox().left,
-                                lastFace.getBoundingBox().top,
+                                Math.max(lastFace.getBoundingBox().left, 0),
+                                Math.max(lastFace.getBoundingBox().top, 0),
                                 width,
                                 height);
                     } else {
                         width = fbImage.getBitmap().getWidth() - lastFace.getBoundingBox().left - 1;
                         height = fbImage.getBitmap().getHeight() - lastFace.getBoundingBox().top - 1;
                         crop = Bitmap.createBitmap(fbImage.getBitmap(),
-                                lastFace.getBoundingBox().left,
-                                lastFace.getBoundingBox().top,
+                                Math.max(lastFace.getBoundingBox().left, 0),
+                                Math.max(lastFace.getBoundingBox().top, 0),
                                 width,
                                 height);
 
