@@ -54,4 +54,7 @@ dependencies {
 
     // for mlkit face detection
     implementation 'com.google.firebase:firebase-ml-vision-face-model:19.0.0'
+
+    // for firebase cloudstore
+    implementation 'com.google.firebase:firebase-firestore:23.0.0'
 }
