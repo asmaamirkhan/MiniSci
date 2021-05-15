@@ -1,8 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.QuizActivity">
+    tools:context=".activities.QuizActivity"
+    android:background="#dfebf2">
 
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/quiz_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp"
+        app:contentPadding="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:cardBackgroundColor="#faf7ff"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Title, secondary and supporting text -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/quiz_question"
+                    android:text="title"
+                    android:textAppearance="?attr/textAppearanceHeadline5"
+                    android:layout_gravity="center"
+                    android:textColor="#080d3b" />
+
+                <RadioGroup
+                    android:id="@+id/quiz_choices_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="24dp">
+
+                    <RadioButton
+                        android:id="@+id/choice_a_radio"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="label_1"
+                        android:buttonTint="@color/purple_200"
+                        android:backgroundTint="@color/purple_200" />
+
+                    <RadioButton
+                        android:id="@+id/choice_b_radio"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:buttonTint="@color/purple_200"
+                        android:backgroundTint="@color/purple_200"
+                        android:text="label_2" />
+
+                    <RadioButton
+                        android:id="@+id/choice_c_radio"
+                        android:layout_width="match_parent"
+                        android:buttonTint="@color/purple_200"
+                        android:backgroundTint="@color/purple_200"
+                        android:layout_height="match_parent"
+                        android:text="label_3" />
+
+                </RadioGroup>
+            </LinearLayout>
+
+            <!-- Buttons -->
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/quiz_submit_button"
+                android:layout_marginEnd="8dp"
+                android:text="Seç"
+                android:layout_gravity="center" />
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/quiz_next_button"
+                android:layout_marginEnd="8dp"
+                android:text="Sonraki"
+                android:layout_gravity="center"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

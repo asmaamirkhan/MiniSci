@@ -1,4 +1,4 @@
-package com.asmaamir.minisci;
+package com.asmaamir.minisci.entities;
 
 import androidx.annotation.NonNull;
 
