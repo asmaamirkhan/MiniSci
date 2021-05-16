@@ -1,21 +1,18 @@
 package com.asmaamir.minisci.activities;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import com.asmaamir.minisci.NotificationBroadcastReceiver;
 import com.asmaamir.minisci.R;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONTokener;
 
 public class MainActivity extends AppCompatActivity {
     private Button butSignin;
@@ -28,67 +25,32 @@ public class MainActivity extends AppCompatActivity {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_main);
-        butSignin = (Button) findViewById(R.id.button_signin);
-        butSignup = (Button) findViewById(R.id.button_signup);
+        startAlert();
+        butSignin = findViewById(R.id.button_signin);
+        butSignup = findViewById(R.id.button_signup);
         butSignup.setOnClickListener(v -> {
-            /*float[] arr = {6.5f, 5.6f, 3.4f};
-            setPrefIntArray("vector", arr);*/
             Intent regRedirect = new Intent(MainActivity.this, RegistrationActivity.class);
             startActivity(regRedirect);
         });
         butSignin.setOnClickListener(v -> {
-            /*float[] arr = {1, 1, 1};
-            float[] prefArr = getPrefFloatArray("embedding", arr);
-            Log.i(TAG, "Size: " + getPrefFloatArray("embedding", arr).length);
-            String vector = "";
-            for (int i = 0; i < prefArr.length; i++) {
-                vector += prefArr[i] + ", ";
-            }
-            Log.i(TAG, vector);
-            SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-            String s = pref.getString("user_name", "NONE");
-            Log.i(TAG, s);*/
             Intent loginRedirect = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(loginRedirect);
-
         });
     }
 
-    public void setPrefIntArray(String tag, float[] value) {
-        SharedPreferences.Editor prefEditor = PreferenceManager.getDefaultSharedPreferences(this)
-                .edit();
+    private void startAlert() {
+        int REQUEST_CODE = 2726287;
+        int i = 5;
+        Intent intent = new Intent(this, NotificationBroadcastReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                this.getApplicationContext(), REQUEST_CODE, intent, 0);
 
-        String s;
-        try {
-            JSONArray jsonArr = new JSONArray();
-            for (float i : value)
-                jsonArr.put(i);
-            JSONObject json = new JSONObject();
-            json.put(tag, jsonArr);
-            s = json.toString();
-        } catch (JSONException excp) {
-            s = "";
-        }
-
-        prefEditor.putString(tag, s);
-        prefEditor.apply();
-    }
-
-    public float[] getPrefFloatArray(String tag, float[] defaultValue) {
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-        String s = pref.getString(tag, "");
-        try {
-            JSONObject json = new JSONObject(new JSONTokener(s));
-            JSONArray jsonArr = json.getJSONArray(tag);
-
-            float[] result = new float[jsonArr.length()];
-
-            for (int i = 0; i < jsonArr.length(); i++)
-                result[i] = (float) jsonArr.getDouble(i);
-
-            return result;
-        } catch (JSONException excp) {
-            return defaultValue;
-        }
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager.setInexactRepeating(AlarmManager.RTC,
+                System.currentTimeMillis(),
+                AlarmManager.INTERVAL_FIFTEEN_MINUTES,
+                //i * 1000,
+                pendingIntent);
+        Toast.makeText(this, "Alarm set in " + i + " seconds", Toast.LENGTH_LONG).show();
     }
 }
