@@ -1,2 +1,2 @@
 # Grad
-👩‍🎓 Graduation project's main repo
+👩‍🎓 Graduation project's main repo. 
