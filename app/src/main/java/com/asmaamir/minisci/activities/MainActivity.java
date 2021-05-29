@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -51,6 +50,6 @@ public class MainActivity extends AppCompatActivity {
                 AlarmManager.INTERVAL_HALF_DAY,
                 //i * 1000,
                 pendingIntent);
-        Toast.makeText(this, "Alarm set in " + i + " seconds", Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "Alarm set in " + i + " seconds", Toast.LENGTH_LONG).show();
     }
 }

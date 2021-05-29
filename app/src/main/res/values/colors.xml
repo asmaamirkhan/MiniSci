@@ -8,4 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="tfe_semi_transparent">#66000000</color>
+    <color name="logo_orange">#f47340</color>
+    <color name="logo_blue">#66bded</color>
+    <color name="logo_green">#8fdd3c</color>
+
 </resources>
