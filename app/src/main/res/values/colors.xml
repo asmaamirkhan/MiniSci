@@ -11,5 +11,6 @@
     <color name="logo_orange">#f47340</color>
     <color name="logo_blue">#66bded</color>
     <color name="logo_green">#8fdd3c</color>
+    <color name="primary_grey">#f7f7f7</color>
 
 </resources>
