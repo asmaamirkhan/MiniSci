@@ -8,9 +8,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.asmaamir.minisci.ObjDetailAdapter;
 import com.asmaamir.minisci.R;
 import com.asmaamir.minisci.entities.Object;
+import com.asmaamir.minisci.helpers.ObjDetailAdapter;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;

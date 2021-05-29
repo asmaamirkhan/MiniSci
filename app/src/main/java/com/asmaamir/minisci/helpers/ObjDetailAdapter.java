@@ -1,4 +1,4 @@
-package com.asmaamir.minisci;
+package com.asmaamir.minisci.helpers;
 
 
 import android.util.Pair;
@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.asmaamir.minisci.R;
 
 import java.util.List;
 

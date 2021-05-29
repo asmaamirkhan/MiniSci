@@ -11,8 +11,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
-import com.asmaamir.minisci.NotificationBroadcastReceiver;
 import com.asmaamir.minisci.R;
+import com.asmaamir.minisci.helpers.NotificationBroadcastReceiver;
 
 public class MainActivity extends AppCompatActivity {
     private Button butSignin;
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.setInexactRepeating(AlarmManager.RTC,
                 System.currentTimeMillis(),
-                AlarmManager.INTERVAL_FIFTEEN_MINUTES,
+                AlarmManager.INTERVAL_HALF_DAY,
                 //i * 1000,
                 pendingIntent);
         Toast.makeText(this, "Alarm set in " + i + " seconds", Toast.LENGTH_LONG).show();

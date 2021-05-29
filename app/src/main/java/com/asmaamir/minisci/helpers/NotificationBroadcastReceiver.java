@@ -1,4 +1,4 @@
-package com.asmaamir.minisci;
+package com.asmaamir.minisci.helpers;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -7,10 +7,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 
+import com.asmaamir.minisci.R;
 import com.asmaamir.minisci.activities.MainActivity;
 import com.asmaamir.minisci.entities.Info;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -35,11 +35,11 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
         db = FirebaseFirestore.getInstance();
         createNotificationChannel();
         showNotification(context);
-        Toast.makeText(context, "MiniSci alarm", Toast.LENGTH_LONG).show();
+        //Toast.makeText(context, "MiniSci alarm", Toast.LENGTH_LONG).show();
     }
 
     private void showNotification(Context context) {
-        // quiz random ID interval: [1,1000]
+        // info random ID interval: [1,1000]
         Random randGenerator = new Random();
         int random = randGenerator.nextInt(1000);
         db.collection("info").whereLessThanOrEqualTo("randomID", random).limit(1).get()
