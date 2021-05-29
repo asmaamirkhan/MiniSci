@@ -60,4 +60,5 @@ dependencies {
 
     // for recycler view
     implementation "androidx.recyclerview:recyclerview:1.2.0"
+
 }

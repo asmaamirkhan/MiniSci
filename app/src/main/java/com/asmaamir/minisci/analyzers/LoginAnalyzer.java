@@ -16,7 +16,9 @@ import android.widget.ImageView;
 import androidx.camera.core.CameraX;
 import androidx.camera.core.ImageAnalysis;
 import androidx.camera.core.ImageProxy;
+import androidx.core.content.ContextCompat;
 
+import com.asmaamir.minisci.R;
 import com.asmaamir.minisci.tflite.SimilarityClassifier;
 import com.google.firebase.ml.vision.FirebaseVision;
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
@@ -76,6 +78,7 @@ public class LoginAnalyzer implements ImageAnalysis.Analyzer {
             int rotation = degreesToFirebaseRotation(rotationDegrees);
             fbImage = FirebaseVisionImage.fromMediaImage(image.getImage(), rotation);
             initBitmap();
+            canvas.drawColor(0, PorterDuff.Mode.CLEAR);
             detectFaces();
         } else {
 
@@ -113,9 +116,9 @@ public class LoginAnalyzer implements ImageAnalysis.Analyzer {
 
     private void initDrawingUtils() {
         linePaint = new Paint();
-        linePaint.setColor(Color.MAGENTA);
+        linePaint.setColor(ContextCompat.getColor(context, R.color.logo_orange));
+        linePaint.setStrokeWidth(16f);
         linePaint.setStyle(Paint.Style.STROKE);
-        linePaint.setStrokeWidth(2f);
         linePaint.setTextSize(50);
 
     }

@@ -11,7 +11,7 @@
         android:id="@+id/imageView2"
         android:layout_width="263dp"
         android:layout_height="223dp"
-        android:src="@drawable/minscilogo"
+        android:src="@drawable/minisci_withback"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,36 +21,50 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:layout_marginEnd="72dp"
         android:orientation="vertical"
+        android:layout_marginTop="72dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="72dp"
-        android:layout_marginStart="120dp"
-        android:layout_marginEnd="120dp">
+        app:layout_constraintTop_toTopOf="parent">
 
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button_signin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sign in"
+            android:layout_marginBottom="36dp"
+            android:backgroundTint="@color/logo_green"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:paddingLeft="48dp"
+            android:paddingRight="48dp"
+            android:text="@string/signin_text"
             tools:layout_editor_absoluteX="115dp"
             tools:layout_editor_absoluteY="412dp"
-            android:layout_marginBottom="48dp"
-            android:backgroundTint="@color/logo_green"
-            android:padding="16dp" />
+            app:icon="@drawable/ic_baseline_psychology_24"
+            android:textAllCaps="false"
+            app:cornerRadius="48dp"
+            android:textStyle="bold" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button_signup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sign up"
+            android:backgroundTint="@color/logo_orange"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:paddingLeft="48dp"
+            android:paddingRight="48dp"
+            android:text="@string/signup_text"
             tools:layout_editor_absoluteX="118dp"
             tools:layout_editor_absoluteY="324dp"
-            android:backgroundTint="@color/logo_orange"
-            android:padding="16dp" />
+            app:icon="@drawable/ic_baseline_auto_fix_high_24"
+            android:textAllCaps="false"
+            app:cornerRadius="48dp"
+            android:textStyle="bold" />
     </LinearLayout>
 
 

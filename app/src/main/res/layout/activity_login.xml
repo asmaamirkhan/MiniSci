@@ -31,7 +31,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Aradığım kişiyi bulamıyorum 🕵️‍♀"
+                android:text="@string/login_analyzer"
                 android:id="@+id/result_text_view_login"
                 android:textAlignment="center"
                 android:textColor="@color/white" />
@@ -47,6 +47,7 @@
         android:layout_gravity="start|bottom"
         android:tint="@android:color/white"
         android:src="@drawable/ic_baseline_compare_arrows_24"
-        android:layout_margin="16dp" />
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/logo_orange" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

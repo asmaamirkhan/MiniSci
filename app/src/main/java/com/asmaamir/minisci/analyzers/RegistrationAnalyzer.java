@@ -16,12 +16,12 @@ import android.view.TextureView;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.camera.core.CameraX;
 import androidx.camera.core.ImageAnalysis;
 import androidx.camera.core.ImageProxy;
+import androidx.core.content.ContextCompat;
 
 import com.asmaamir.minisci.R;
 import com.asmaamir.minisci.activities.RegistrationActivity;
@@ -95,9 +95,7 @@ public class RegistrationAnalyzer implements ImageAnalysis.Analyzer {
         LayoutInflater inflater = LayoutInflater.from(context);
         View dialogLayout = inflater.inflate(R.layout.face_edit_dialog, null);
         ImageView ivFace = dialogLayout.findViewById(R.id.dlg_image);
-        TextView tvTitle = dialogLayout.findViewById(R.id.dlg_title);
         EditText etName = dialogLayout.findViewById(R.id.dlg_input);
-        tvTitle.setText("Add Face");
 
         if (lastFace != null) {
             Bitmap crop = Bitmap.createBitmap(fbImage.getBitmap(),
@@ -109,7 +107,7 @@ public class RegistrationAnalyzer implements ImageAnalysis.Analyzer {
             ivFace.setImageBitmap(scaled);
 
 
-            etName.setHint("Input name");
+            //etName.setHint("Input name");
             builder.setPositiveButton("OK", (dlg, i) -> {
                 String name = etName.getText().toString();
                 if (name.isEmpty()) {
@@ -153,9 +151,9 @@ public class RegistrationAnalyzer implements ImageAnalysis.Analyzer {
 
     private void initDrawingUtils() {
         linePaint = new Paint();
-        linePaint.setColor(Color.MAGENTA);
+        linePaint.setColor(ContextCompat.getColor(context, R.color.logo_blue));
+        linePaint.setStrokeWidth(16f);
         linePaint.setStyle(Paint.Style.STROKE);
-        linePaint.setStrokeWidth(2f);
         linePaint.setTextSize(50);
 
     }

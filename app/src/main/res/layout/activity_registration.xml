@@ -40,9 +40,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start|bottom"
-        android:tint="@android:color/white"
         android:src="@drawable/ic_baseline_compare_arrows_24"
-        android:layout_margin="16dp" />
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/logo_orange" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/button_register"
@@ -50,8 +50,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="16dp"
-        android:src="@android:drawable/ic_input_add"
-        android:tint="@android:color/white" />
+        android:src="@drawable/ic_baseline_add_24"
+        android:tint="@android:color/white"
+        android:backgroundTint="@color/logo_green" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

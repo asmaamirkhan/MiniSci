@@ -1,16 +1,20 @@
 package com.asmaamir.minisci.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Matrix;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.util.Size;
 import android.view.Surface;
 import android.view.TextureView;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -34,6 +38,7 @@ import java.io.IOException;
 public class LoginActivity extends AppCompatActivity {
     private TextureView textureView;
     private ImageView imageView;
+    private TextView tvUserName;
     private SimilarityClassifier facenet;
     public static final int REQUEST_CODE_PERMISSION = 101;
     public static final String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.CAMERA"};
@@ -44,10 +49,14 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_login);
 
         textureView = findViewById(R.id.texture_view_login);
         imageView = findViewById(R.id.image_view_login);
+        tvUserName = findViewById(R.id.result_text_view_login);
+        tvUserName.setText(getString(R.string.login_analyzer, getUserName()));
+
         if (allPermissionsGranted()) {
             textureView.post(this::startCamera);
         } else {
@@ -190,5 +199,11 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
         return true;
+    }
+
+    private String getUserName() {
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+        String name = pref.getString("user_name", "NONE");
+        return name;
     }
 }

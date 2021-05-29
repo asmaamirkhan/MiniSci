@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -10,25 +9,27 @@
         android:id="@+id/dlg_title"
         android:layout_gravity="center"
         android:textSize="20sp"
-        tools:text="The dialog title"
+        android:text="@string/register_title"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:paddingBottom="28dp" />
 
     <ImageView
         android:layout_gravity="center"
         android:id="@+id/dlg_image"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:scaleType="centerCrop"
         android:adjustViewBounds="true"
-        android:src="@drawable/ic_baseline_compare_arrows_24" />
+        android:src="@drawable/ic_baseline_tag_faces_24" />
 
     <EditText
         android:layout_gravity="center"
         android:id="@+id/dlg_input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:hint="The dialog hint" />
+        android:hint="@string/register_get_name"
+        android:paddingTop="36dp" />
 
 
 </LinearLayout>

@@ -3,7 +3,9 @@ package com.asmaamir.minisci.activities;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,11 +21,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_main);
         startAlert();
         butSignin = findViewById(R.id.button_signin);
         butSignup = findViewById(R.id.button_signup);
+        butSignin.setText(getString(R.string.signin_text, getUserName()));
         butSignup.setOnClickListener(v -> {
             Intent regRedirect = new Intent(MainActivity.this, RegistrationActivity.class);
             startActivity(regRedirect);
@@ -31,7 +33,14 @@ public class MainActivity extends AppCompatActivity {
         butSignin.setOnClickListener(v -> {
             Intent loginRedirect = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(loginRedirect);
+            finish();
         });
+    }
+
+    private String getUserName() {
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+        String name = pref.getString("user_name", "NONE");
+        return name;
     }
 
     private void startAlert() {

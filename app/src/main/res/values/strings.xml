@@ -12,7 +12,19 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
 
+    <!-- splash -->
     <string name="splash_title">Asmaa Mirkhan</string>
     <string name="splash_text">Made with ♥ by Asmaa Mirkhan 🦋</string>
+
+    <!-- main -->
+    <string name="signin_text">Lets start %s!</string>
+    <string name="signup_text">Sign up now!</string>
+
+    <!-- login analyzer -->
+    <string name="login_analyzer">I am looking for %s! 🕵️‍♀️</string>
+
+    <!-- registration dialog -->
+    <string name="register_title">Welcome! 🎉</string>
+    <string name="register_get_name">Your name</string>
 
 </resources>
