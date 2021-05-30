@@ -6,23 +6,23 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_explore"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Etrafı keşfet" />
+            android:icon="@drawable/ic_baseline_auto_awesome_24"
+            android:title="@string/menu_explore" />
         <item
             android:id="@+id/nav_translate"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="İngilizce öğrenelim" />
+            android:icon="@drawable/ic_baseline_language_24"
+            android:title="@string/menu_learn_translate" />
         <item
             android:id="@+id/nav_quiz"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Quiz çöz" />
+            android:icon="@drawable/ic_baseline_school_24"
+            android:title="@string/menu_solve" />
         <item
             android:id="@+id/nav_quick_info"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Hızlı bilgi" />
+            android:icon="@drawable/ic_baseline_auto_stories_24"
+            android:title="@string/menu_quick_info" />
         <item
             android:id="@+id/nav_get_quote"
-            android:icon="@drawable/ic_baseline_tag_faces_24"
-            android:title="Hızlı söz" />
+            android:icon="@drawable/ic_baseline_favorite_border_24"
+            android:title="@string/menu_quick_quote" />
     </group>
 </menu>

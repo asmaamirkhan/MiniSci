@@ -8,7 +8,7 @@
     android:layout_marginBottom="12dp"
     android:layout_marginStart="24dp"
     android:layout_marginEnd="24dp"
-    app:cardBackgroundColor="#faf7ff"
+    app:cardBackgroundColor="@color/primary_grey"
     app:cardCornerRadius="15dp"
     app:cardElevation="10dp"
     app:contentPadding="12dp">
@@ -25,7 +25,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/obj_info_title"
             android:text="Title"
-            android:textSize="24sp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/logo_blue"
             android:layout_marginBottom="8dp" />
 
         <TextView
@@ -33,7 +35,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/obj_info_content"
             android:text="Content"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
 
     </LinearLayout>

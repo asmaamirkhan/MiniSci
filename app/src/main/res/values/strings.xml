@@ -41,4 +41,16 @@
     <string name="drowsy">DROWSY 😴</string>
     <string name="next">Continue</string>
 
+    <!-- explore -->
+    <string name="lets_explore">Let\'s explore objects arround us 🕵️‍♀️</string>
+
+    <!-- translate -->
+    <string name="lets_translate">Now you know 2 languages 🤩️</string>
+
+    <!-- Menu -->
+    <string name="menu_explore">Explore</string>
+    <string name="menu_solve">Solve Quiz</string>
+    <string name="menu_quick_info">Quick Info</string>
+    <string name="menu_quick_quote">Quick Quote</string>
+    <string name="menu_learn_translate">Learn language</string>
 </resources>

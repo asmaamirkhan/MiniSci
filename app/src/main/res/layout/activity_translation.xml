@@ -31,7 +31,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nesneleri keşfedelim 🕵️‍♀"
+                android:text="@string/lets_translate"
                 android:id="@+id/text_view_translate"
                 android:textAlignment="center"
                 android:textColor="@color/white" />
