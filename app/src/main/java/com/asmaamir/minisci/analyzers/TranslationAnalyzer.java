@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.os.AsyncTask;
@@ -24,6 +25,7 @@ import com.asmaamir.minisci.tflite.YoloV4TinyClassifier;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Random;
 
 public class TranslationAnalyzer implements ImageAnalysis.Analyzer {
     private static final String TAG = "DetectionAnalyzer";
@@ -73,6 +75,8 @@ public class TranslationAnalyzer implements ImageAnalysis.Analyzer {
             float delta_w = textureView.getBitmap().getWidth() / (TF_OD_API_INPUT_SIZE * 1.0f);
             float delta_h = textureView.getBitmap().getHeight() / (TF_OD_API_INPUT_SIZE * 1.0f);
             for (final YoloV4TinyClassifier.Recognition result : results) {
+                Random rnd = new Random();
+                linePaint.setARGB(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
                 final RectF location = result.getLocation();
                 if (location != null && result.getConfidence() >= MINIMUM_CONFIDENCE_TF_OD_API) {
                     Rect box = new Rect((int) ((result.getLocation().left) * delta_w),
@@ -80,10 +84,14 @@ public class TranslationAnalyzer implements ImageAnalysis.Analyzer {
                             (int) ((result.getLocation().right) * delta_w),
                             (int) ((result.getLocation().bottom) * delta_h));
                     canvas.drawRect(box, linePaint);
-
-                    canvas.drawText(result.getTitle(),
+                    String[] parts = result.getTitle().split("-");
+                    canvas.drawText(parts[0],
                             (int) (result.getLocation().left) * delta_w,
                             (int) (result.getLocation().top) * delta_h,
+                            linePaint);
+                    canvas.drawText(parts[1],
+                            (int) (result.getLocation().left) * delta_w,
+                            (int) (result.getLocation().bottom) * delta_h,
                             linePaint);
                 }
             }
@@ -108,13 +116,14 @@ public class TranslationAnalyzer implements ImageAnalysis.Analyzer {
         linePaint = new Paint();
         linePaint.setColor(Color.MAGENTA);
         linePaint.setStyle(Paint.Style.STROKE);
-        linePaint.setStrokeWidth(4f);
-        linePaint.setTextSize(75);
+        linePaint.setStrokeWidth(8f);
+        linePaint.setTextSize(90);
     }
 
     private void initBitmap() {
         bitmap = Bitmap.createBitmap(textureView.getWidth(), textureView.getHeight(), Bitmap.Config.ARGB_8888);
         canvas = new Canvas(bitmap);
+        canvas.drawColor(0, PorterDuff.Mode.CLEAR);
     }
 
     private void initDetector() {

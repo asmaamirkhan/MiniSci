@@ -1,80 +1,80 @@
-person - insan
-bicycle - bisiklet
-car - araba
-motorbike - motor
-aeroplane - uçak
-bus - otobüs
-train - tren
-truck - kamyon
-boat - tekne
-traffic light - trafik ışığı
-fire hydrant - yangın musluğu
-stop sign - dur işareti
-parking meter - parkmetre
-bench - bank
-bird - kuş
-cat - kedi
-dog - köpek
-horse - at
-sheep - koyun
-cow - inek
-elephant - fil
-bear - ayı
-zebra - zebra
-giraffe - zürafa
-backpack - sırt çantası
-umbrella - şemsiye
-handbag - el çantası
-tie - kravat
-suitcase - bavul
-frisbee - frizbee
-skis - kayaklar
-snowboard - snowboard
-sports ball - spor topu
-kite - uçurtma
-baseball bat - beysbol sopası
-baseball glove - beyzbol eldiveni
-skateboard - kaykay
-surfboard - sörf tahtası
-tennis racket -
+person - insan 👤
+bicycle - bisiklet 🚲
+car - araba 🚗
+motorbike - motor 🏍
+aeroplane - uçak ✈
+bus - otobüs 🚌
+train - tren 🚄
+truck - kamyon 🚚
+boat - tekne 🚢
+traffic light - trafik ışığı 🚦
+fire hydrant - yangın musluğu 🔥
+stop sign - dur işareti 🛑
+parking meter - parkmetre 🅿
+bench - bank 🏞
+bird - kuş 🐦
+cat - kedi 😻
+dog - köpek 🐶
+horse - at 🐴
+sheep - koyun 🐑
+cow - inek 🐮
+elephant - fil 🐘
+bear - ayı 🐻
+zebra - zebra 🦓
+giraffe - zürafa 🦒
+backpack - sırt çantası 🎒
+umbrella - şemsiye ☔
+handbag - el çantası 👜
+tie - kravat 👔
+suitcase - bavul 💼
+frisbee - frizbee 👟
+skis - kayaklar 🎿
+snowboard - snowboard ⛷
+sports ball - spor topu ⚽
+kite - uçurtma 🪁
+baseball bat - beysbol sopası ⚾
+baseball glove - beyzbol eldiveni 🧤
+skateboard - kaykay 🛹
+surfboard - sörf tahtası 🏄‍♀️
+tennis racket - tenis raketi ⚾
 bottle - şişe 🍶
-wine glass - şarap bardağı
-cup - bardak
-fork - çatal
-knife - bıçak
-spoon - kaşık
-bowl - kase
-banana - muz
-apple - elma
-sandwich - sandviç
-orange - portakal
-broccoli - brokoli
-carrot - havuç
-hot dog - sosis
-pizza - piza
-donut - çörek
-cake - kek
-chair - sandalye
-sofa - kenepe
-potted plant - saksı bitkisi
-bed - yatak
-dining table - yemek masası
-toilet - tuvalet
-tvmonitor - tv ekranı
-laptop - dizüstü bilgisayar
-mouse - fare
-remote - uzaktan kumanda
-keyboard - klavye
-cell phone - telefon
-microwave - mikro dalga
-oven - fırın
-toaster - tost makinesi
-sink - lavabo
-refrigerator - buzdolabı
-book - kitap
-clock - saat
-vase - vazo
-scissors - makas
-teddy bear - oyuncak ayı
-hair drier - saç kurutma makinesi
-toothbrush - diş fırçası
+wine glass - şarap bardağı 🍷
+cup - bardak 🥤
+fork - çatal 🍴
+knife - bıçak 🍴
+spoon - kaşık 🥄
+bowl - kase 🍚
+banana - muz 🍌
+apple - elma 🍎
+sandwich - sandviç 🥪
+orange - portakal 🍊
+broccoli - brokoli 🥦
+carrot - havuç 🥕
+hot dog - sosis 🌭
+pizza - piza 🍕
+donut - çörek 🍩
+cake - kek 🎂
+chair - sandalye 🪑
+sofa - kenepe 💺
+potted plant - saksı bitkisi 🌱
+bed - yatak 🛌
+dining table - yemek masası 🍽
+toilet - tuvalet 🧻
+tvmonitor - tv ekranı 📺
+laptop - dizüstü bilgisayar 💻
+mouse - fare 🖱
+remote - uzaktan kumanda 🎛
+keyboard - klavye ⌨
+cell phone - telefon 📱
+microwave - mikro dalga 😋
+oven - fırın 👩‍🍳
+toaster - tost makinesi 🥪
+sink - lavabo 💦
+refrigerator - buzdolabı 👨‍🍳
+book - kitap 📕
+clock - saat ⏰
+vase - vazo 🌷
+scissors - makas ✂
+teddy bear - oyuncak ayı 🎎
+hair drier - saç kurutma makinesi 💇‍♀️
+toothbrush - diş fırçası 🦷
