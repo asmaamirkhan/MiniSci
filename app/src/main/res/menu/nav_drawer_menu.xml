@@ -9,6 +9,10 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="Etrafı keşfet" />
         <item
+            android:id="@+id/nav_translate"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="İngilizce öğrenelim" />
+        <item
             android:id="@+id/nav_quiz"
             android:icon="@drawable/ic_menu_gallery"
             android:title="Quiz çöz" />

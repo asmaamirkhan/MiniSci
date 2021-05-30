@@ -74,6 +74,10 @@ public class DashboardActivity extends AppCompatActivity {
                             Log.i(TAG, "get quote");
                             switchActivity(QuoteActivity.class);
                             return true;
+                        case R.id.nav_translate:
+                            Log.i(TAG, "Translate");
+                            switchActivity(TranslationActivity.class);
+                            return true;
                         default:
                             Log.i(TAG, "item clicked");
                             switchActivity(QuizActivity.class);

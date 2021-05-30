@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MiniSci">
+        <activity android:name=".activities.TranslationActivity"></activity>
         <activity android:name=".activities.MainActivity" />
         <activity android:name=".activities.QuoteActivity" />
         <activity android:name=".activities.ObjInfoActivity" />
