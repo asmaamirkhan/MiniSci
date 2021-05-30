@@ -45,14 +45,15 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Günün sözü"
+                            android:text="@string/quote_day"
                             android:textAppearance="?attr/textAppearanceHeadline6" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
-                            android:text="Söz içeriği"
+                            android:id="@+id/dashboard_quote_text_view"
+                            android:text="quote"
                             android:textAppearance="?attr/textAppearanceBody2"
                             android:textColor="?android:attr/textColorSecondary" />
 
@@ -90,14 +91,15 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Su hatırla"
+                            android:text="@string/info_day"
                             android:textAppearance="?attr/textAppearanceHeadline6" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
-                            android:text="Su faydası"
+                            android:text="info"
+                            android:id="@+id/dashboard_info_text_view"
                             android:textAppearance="?attr/textAppearanceBody2"
                             android:textColor="?android:attr/textColorSecondary" />
 
@@ -133,14 +135,14 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Biraz öğrenelim"
+                            android:text="@string/lets_learn"
                             android:textAppearance="?attr/textAppearanceHeadline6" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
-                            android:text="Ne yapmak istersin?"
+                            android:text="@string/what_to_do"
                             android:textAppearance="?attr/textAppearanceBody2"
                             android:textColor="?android:attr/textColorSecondary" />
                         <!-- Buttons -->

@@ -30,5 +30,15 @@
     <!-- dahsboard -->
     <string name="solve_quiz">Solve a quiz! 👩‍🏫</string>
     <string name="explore">Explore! 🕵️‍♀️</string>
+    <string name="quote_day">Quote of the day 🌸️</string>
+    <string name="info_day">Did you know?️🤔</string>
+    <string name="lets_learn">Let\'s learn new things 👩‍🎓</string>
+    <string name="what_to_do">What do you want to do?</string>
+    <string name="welcome_user">Nice to see you again %s! 🎉</string>
+    <string name="emotion_result">You seem %s today! let\'s have some fun together 🤩</string>
+    <string name="happy">HAPPY 🎉</string>
+    <string name="sad">LOW MOTIVATED 🥰</string>
+    <string name="drowsy">DROWSY 😴</string>
+    <string name="next">Continue</string>
 
 </resources>
