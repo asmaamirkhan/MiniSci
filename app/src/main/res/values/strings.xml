@@ -39,7 +39,7 @@
     <string name="happy">HAPPY 🎉</string>
     <string name="sad">LOW MOTIVATED 🥰</string>
     <string name="drowsy">DROWSY 😴</string>
-    <string name="next">Continue</string>
+    <string name="continue_word">Continue</string>
 
     <!-- explore -->
     <string name="lets_explore">Let\'s explore objects arround us 🕵️‍♀️</string>
@@ -53,4 +53,9 @@
     <string name="menu_quick_info">Quick Info</string>
     <string name="menu_quick_quote">Quick Quote</string>
     <string name="menu_learn_translate">Learn language</string>
+    <string name="next">Next</string>
+
+    <!-- quiz -->
+    <string name="select">Select</string>
+
 </resources>

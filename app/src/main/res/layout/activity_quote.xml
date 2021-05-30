@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
         android:layout_marginStart="24dp"
-        app:cardBackgroundColor="#faf7ff"
+        app:cardBackgroundColor="@color/primary_grey"
         app:cardCornerRadius="15dp"
         app:cardElevation="10dp"
         app:contentPadding="24dp"
@@ -60,10 +60,11 @@
                 android:layout_gravity="center"
                 android:text="author"
                 android:textColor="#080d3b"
-                android:textSize="12sp"
+                android:textSize="10sp"
+                android:textStyle="bold"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/rounded_corner"
-                android:padding="4dp" />
+                android:padding="8dp" />
         </LinearLayout>
 
         <!-- Buttons -->
@@ -76,7 +77,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Sonraki"
+        android:text="@string/next"
+        app:icon="@drawable/ic_baseline_arrow_forward_24"
+        android:textAllCaps="false"
+        app:cornerRadius="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

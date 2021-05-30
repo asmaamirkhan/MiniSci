@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.QuizActivity"
-    android:background="#dfebf2">
+    tools:context=".activities.QuizActivity">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/quiz_card"
@@ -16,7 +15,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:cardBackgroundColor="#faf7ff"
+        app:cardBackgroundColor="@color/primary_grey"
         app:cardCornerRadius="15dp"
         app:cardElevation="10dp">
 
@@ -54,46 +53,65 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="label_1"
-                        android:buttonTint="@color/purple_200"
-                        android:backgroundTint="@color/purple_200" />
+                        android:buttonTint="@color/logo_blue"
+                        android:backgroundTint="@color/logo_blue"
+                        android:textSize="18sp" />
 
                     <RadioButton
                         android:id="@+id/choice_b_radio"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:buttonTint="@color/purple_200"
-                        android:backgroundTint="@color/purple_200"
-                        android:text="label_2" />
+                        android:buttonTint="@color/logo_blue"
+                        android:backgroundTint="@color/logo_blue"
+                        android:text="label_2"
+                        android:textSize="18sp" />
 
                     <RadioButton
                         android:id="@+id/choice_c_radio"
                         android:layout_width="match_parent"
-                        android:buttonTint="@color/purple_200"
-                        android:backgroundTint="@color/purple_200"
+                        android:buttonTint="@color/logo_blue"
+                        android:backgroundTint="@color/logo_blue"
                         android:layout_height="match_parent"
-                        android:text="label_3" />
+                        android:text="label_3"
+                        android:textSize="18sp" />
 
                 </RadioGroup>
             </LinearLayout>
 
             <!-- Buttons -->
 
-            <com.google.android.material.button.MaterialButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/quiz_submit_button"
-                android:layout_marginEnd="8dp"
-                android:text="Seç"
-                android:layout_gravity="center" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/quiz_submit_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/quiz_next_button"
-                android:layout_marginEnd="8dp"
-                android:text="Sonraki"
                 android:layout_gravity="center"
+                android:text="@string/select"
+                app:icon="@drawable/ic_baseline_navigate_next_24"
+                android:textAllCaps="false"
+                app:cornerRadius="48dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/quote_card"
+                app:layout_constraintVertical_bias="0.297" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/quiz_next_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/next"
+                app:icon="@drawable/ic_baseline_arrow_forward_24"
+                android:textAllCaps="false"
+                app:cornerRadius="48dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/quote_card"
+                app:layout_constraintVertical_bias="0.297"
                 android:visibility="gone" />
+
 
         </LinearLayout>
 

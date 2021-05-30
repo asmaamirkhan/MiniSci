@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 
 import com.asmaamir.minisci.R;
 import com.asmaamir.minisci.entities.Quiz;
@@ -56,29 +57,26 @@ public class QuizActivity extends AppCompatActivity {
             for (int i = 0; i < 3; i++) {
                 rButton = (RadioButton) rgChoices.getChildAt(i);
                 if (i == quiz.getAnswer() - 1)
-                    rButton.setTextColor(Color.GREEN);
+                    rButton.setTextColor(ContextCompat.getColor(this, R.color.logo_green));
                 else
-                    rButton.setTextColor(Color.RED);
+                    rButton.setTextColor(ContextCompat.getColor(this, R.color.logo_orange));
 
             }
-            rbChoiceA.setTextColor(Color.RED);
+            rbChoiceA.setTextColor(ContextCompat.getColor(this, R.color.logo_orange));
             butSubmit.setVisibility(View.GONE);
             butNext.setVisibility(View.VISIBLE);
         });
-        butNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fetchData();
-                RadioButton rButton;
-                for (int i = 0; i < 3; i++) {
-                    rButton = (RadioButton) rgChoices.getChildAt(i);
-                    rButton.setTextColor(Color.BLACK);
+        butNext.setOnClickListener(v -> {
+            fetchData();
+            RadioButton rButton;
+            for (int i = 0; i < 3; i++) {
+                rButton = (RadioButton) rgChoices.getChildAt(i);
+                rButton.setTextColor(Color.BLACK);
 
-                }
-                butSubmit.setVisibility(View.VISIBLE);
-                butNext.setVisibility(View.GONE);
-                rgChoices.clearCheck();
             }
+            butSubmit.setVisibility(View.VISIBLE);
+            butNext.setVisibility(View.GONE);
+            rgChoices.clearCheck();
         });
     }
 

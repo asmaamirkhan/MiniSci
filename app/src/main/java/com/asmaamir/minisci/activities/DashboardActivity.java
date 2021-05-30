@@ -181,7 +181,7 @@ public class DashboardActivity extends AppCompatActivity {
         }
 
 
-        builder.setPositiveButton(getResources().getString(R.string.next), (dlg, i) -> {
+        builder.setPositiveButton(getResources().getString(R.string.continue_word), (dlg, i) -> {
             dlg.dismiss();
         });
         builder.setView(dialogLayout);
