@@ -1,0 +1,17 @@
+bird
+cat
+dog
+horse
+sheep
+cow
+elephant
+bear
+giraffe
+banana
+apple
+orange
+broccoli
+Carrot
+chicken
+fish
+grape

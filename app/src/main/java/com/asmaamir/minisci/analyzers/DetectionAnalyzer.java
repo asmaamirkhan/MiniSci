@@ -19,11 +19,12 @@ import androidx.camera.core.ImageAnalysis;
 import androidx.camera.core.ImageProxy;
 
 import com.asmaamir.minisci.tflite.SimilarityClassifier;
-import com.asmaamir.minisci.tflite.TFLiteYoloV4TinyModel;
+import com.asmaamir.minisci.tflite.TFLiteYoloV4TinyMiniSci;
 import com.asmaamir.minisci.tflite.YoloV4TinyClassifier;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Random;
 
 public class DetectionAnalyzer implements ImageAnalysis.Analyzer {
     private static final String TAG = "DetectionAnalyzer";
@@ -78,6 +79,8 @@ public class DetectionAnalyzer implements ImageAnalysis.Analyzer {
             float delta_w = textureView.getBitmap().getWidth() / (TF_OD_API_INPUT_SIZE * 1.0f);
             float delta_h = textureView.getBitmap().getHeight() / (TF_OD_API_INPUT_SIZE * 1.0f);
             for (final YoloV4TinyClassifier.Recognition result : results) {
+                Random rnd = new Random();
+                linePaint.setARGB(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
                 final RectF location = result.getLocation();
                 if (location != null && result.getConfidence() >= MINIMUM_CONFIDENCE_TF_OD_API) {
                     Rect box = new Rect((int) ((result.getLocation().left) * delta_w),
@@ -113,8 +116,8 @@ public class DetectionAnalyzer implements ImageAnalysis.Analyzer {
         linePaint = new Paint();
         linePaint.setColor(Color.MAGENTA);
         linePaint.setStyle(Paint.Style.STROKE);
-        linePaint.setStrokeWidth(4f);
-        linePaint.setTextSize(75);
+        linePaint.setStrokeWidth(8f);
+        linePaint.setTextSize(80);
     }
 
     private void initOnTouch() {
@@ -147,7 +150,7 @@ public class DetectionAnalyzer implements ImageAnalysis.Analyzer {
 
     private void initDetector() {
         try {
-            yolov4 = TFLiteYoloV4TinyModel.create(context.getAssets());
+            yolov4 = TFLiteYoloV4TinyMiniSci.create(context.getAssets());
         } catch (IOException e) {
             e.printStackTrace();
             Log.i(TAG, "Exception initializing classifier!");

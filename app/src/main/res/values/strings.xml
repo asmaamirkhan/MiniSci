@@ -27,4 +27,8 @@
     <string name="register_title">Welcome! 🎉</string>
     <string name="register_get_name">Your name</string>
 
+    <!-- dahsboard -->
+    <string name="solve_quiz">Solve a quiz! 👩‍🏫</string>
+    <string name="explore">Explore! 🕵️‍♀️</string>
+
 </resources>
