@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,6 +28,8 @@ public class DashboardActivity extends AppCompatActivity {
     private final static float EYE_OPEN_THRESH = 0.6f;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
+    private Button exploreButton;
+    private Button solveQuizButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +37,15 @@ public class DashboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
         initReceptionDialog(getUserEmotion());
         initNavigationDrawer();
+        initButtons();
     }
 
+    private void initButtons() {
+        exploreButton = findViewById(R.id.dashboard_explore_button);
+        solveQuizButton = findViewById(R.id.dashboard_solve_quiz_button);
+        exploreButton.setOnClickListener(v -> switchActivity(ExploreActivity.class));
+        solveQuizButton.setOnClickListener(v -> switchActivity(QuizActivity.class));
+    }
 
     private void initNavigationDrawer() {
         drawerLayout = findViewById(R.id.drawer_layout);
