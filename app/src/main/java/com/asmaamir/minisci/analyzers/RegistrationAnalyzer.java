@@ -1,7 +1,9 @@
 package com.asmaamir.minisci.analyzers;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -24,6 +26,7 @@ import androidx.camera.core.ImageProxy;
 import androidx.core.content.ContextCompat;
 
 import com.asmaamir.minisci.R;
+import com.asmaamir.minisci.activities.MainActivity;
 import com.asmaamir.minisci.activities.RegistrationActivity;
 import com.asmaamir.minisci.tflite.SimilarityClassifier;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -121,7 +124,8 @@ public class RegistrationAnalyzer implements ImageAnalysis.Analyzer {
 
                 float[] emb = facenet.recognizeImage(scaled, false);
                 setPrefFloatArray("embedding", emb);
-
+                Intent dashRedirect = new Intent((Activity) context, MainActivity.class);
+                context.startActivity(dashRedirect);
                 dlg.dismiss();
             });
             builder.setView(dialogLayout);
