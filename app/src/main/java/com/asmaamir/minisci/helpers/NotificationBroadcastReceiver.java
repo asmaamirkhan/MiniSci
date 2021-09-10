@@ -50,8 +50,8 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
                         info = list.get(0).toObject(Info.class);
                         buildNotification(context,
                                 info.getContent(),
-                                "🧐 Bunu biliyor muydun?",
-                                "MiniSci bilgilendiricisi"
+                                "🧐 Did you know?",
+                                "MiniSci Informer"
                         );
                         mNotificationManager.notify(0, notificationBuilder.build());
                         Log.i(TAG, "Notification is created");
