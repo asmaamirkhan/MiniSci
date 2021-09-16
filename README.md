@@ -1,12 +1,17 @@
+
+![](./ss/mockup.png)
+
 # ✨ MiniSci
-AI based mobile apps that aims to improve learning experience for children 🎈
+- AI based mobile app that aims to improve learning experience for children 🎈
+- MiniSci is a proof-of-concept for the ability of improving learning experience using AI
+- Made with a lot of love 💗
 
 ## 💼 Used structures
 ### 💣 AI
 - Face recognition: FaceNet
-- Similarity criteria: cosine distance 
-- Object Detection : yolo v4 tiny
-- Face detection: blaze face
+- Similarity criteria: Cosine distance 
+- Object Detection : YOLO V4 Tiny
+- Face detection: Blaze Face
 
 ### 📱 Android
 - Shared preferences
@@ -14,7 +19,8 @@ AI based mobile apps that aims to improve learning experience for children 🎈
 - Firebase database
 - Firebase MLKit
 - Tflite interpreter
-- Notification broadcast
+- Notifications
+- Broadcast Reciever
 - RecyclerView
 
 ## 👮‍♀️ Face Recognition
@@ -32,14 +38,12 @@ AI based mobile apps that aims to improve learning experience for children 🎈
 <div>
   
 ### 👤 Login Process
-- A face detection model (blaze face) detects faces in the frames, finds each vector corresponded to each detected face, calculates cosine distance with vector stored in sharedPrefernces, finds the registered user and pass to dashboard activity. 
+- A face detection model (Blaze face) detects faces in the frames, finds each vector corresponded to each detected face, calculates cosine distance with vector stored in sharedPrefernces, finds the registered user and pass to dashboard activity. 
 - The last detected face is also used for emotion analysis using the ststus of eyes and mouth and every face is classified as `Neutral`, `Happy` or `Drowsy` and different welcome dialogs are shown correspondingly.
   
 <div float="left">
 <img src="./ss/looking.jpeg" width="200"  />
-<img src="./ss/happy.jpeg" width="200"  />
-<img src="./ss/drowsy.jpeg" width="200"  />
-<img src="./ss/low.jpeg" width="200"  />
+<img src="./ss/emotion.png" width="380"  />
 <div>
 
 
