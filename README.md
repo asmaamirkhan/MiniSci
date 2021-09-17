@@ -110,7 +110,7 @@ Quote and Info of the day with inspirational photos
 ## 🥰 Quote Activity
 - "Educating the mind without educating the heart is no education at all"
 - A quote is feteched from Firebase and shown in an interface
-- MinSci aims to educate children both scitifically and emotionaly so in this interface we aim to inspire the child and motivate him to be a better **HUMAN**
+- MinSci aims to educate children both scientifically and emotionally so in this interface we aim to inspire the child and motivate him to be a better **HUMAN**
 
 <div float="left">
 <img src="./ss/quote.jpeg" width="200"  />
