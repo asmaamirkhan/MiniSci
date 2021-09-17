@@ -38,8 +38,8 @@
 <div>
   
 ### 👤 Login Process
-- A face detection model (Blaze face) detects faces in the frames, finds each vector corresponded to each detected face, calculates cosine distance with vector stored in sharedPrefernces, finds the registered user and pass to dashboard activity. 
-- The last detected face is also used for emotion analysis using the ststus of eyes and mouth and every face is classified as `Neutral`, `Happy` or `Drowsy` and different welcome dialogs are shown correspondingly.
+- A face detection model (Blaze face) detects faces in the frames, FaceNet finds each vector corresponded to each detected face, cosine distance with vector stored in sharedPrefernces is being calculated, when the registered user is found he can pass to dashboard activity. 
+- The last detected face is also used for emotion analysis using the status of eyes and mouth and every face is classified as `Neutral`, `Happy` or `Drowsy` and different welcome dialogs are shown correspondingly.
   
 <div float="left">
 <img src="./ss/looking.jpeg" width="200"  />
