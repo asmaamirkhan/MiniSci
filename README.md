@@ -118,10 +118,10 @@ Quote and Info of the day with inspirational photos
 
 ## 👩‍🎨 Logo 
 
-- Blue: `#66bded`
-- Green: `#8fdd3c`
-- Orange: `#f47340`
-- Grey: `#f7f7f7`
+- 🔵: `#66bded`
+- 🟢: `#8fdd3c`
+- 🟠: `#f47340`
+- ⚪️: `#f7f7f7`
 
 <div float="left">
 <img src="./ss/minisci_withback.png" width="150"  />
